@@ -1,21 +1,23 @@
 {
-  "name": "desafio2",
+  "name": "coderhouse",
   "version": "1.0.0",
-  "description": "Desarrollador: Alexander Reineck  \r Camada: 17060  \r Tutor: Hernan Garcia Curbelo",
+  "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alexanderrr1/node-coderhouse.git"
   },
-  "author": "+",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/alexanderrr1/node-coderhouse/issues"
   },
-  "homepage": "https://github.com/alexanderrr1/node-coderhouse#readme"
+  "homepage": "https://github.com/alexanderrr1/node-coderhouse#readme",
+  "dependencies": {
+    "dotenv": "^12.0.4",
+    "express": "^4.17.2"
+  }
 }
