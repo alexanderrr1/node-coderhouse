@@ -17,13 +17,12 @@ const productosGet = async(req = request, res = response) => {
 const productosGetById = async(req = request, res = response) => {
 
     const productos  = JSON.parse(fs.readFileSync(db, utf));
-
     let productoEncontrado = productos.find(producto => producto.id === req.params.id );
 
     if( !productoEncontrado ){
         
         return res.status(400).json({
-            msg : 'No existe producto con ese ID'
+            error : 'producto no encontrado'
         });
 
     }
@@ -34,15 +33,16 @@ const productosGetById = async(req = request, res = response) => {
 
 }
 
-const productosPost = async(req = request, res = response) => {
+const productoPost = async(req = request, res = response) => {
 
-    const productos  = JSON.parse(fs.readFileSync(db, utf));
+    const { title, price, thumbnail } = req.body;
+    const productos = JSON.parse(fs.readFileSync(db, utf));
 
     const productoNuevo = {
-        title: 'ProductoNuevo',
-        price: '444.44',
-        thumbnail: 'https://thumbnailnuevo.com',
-        id: '$2a$12$wasdsadadadasdasddasdasdasdadaWY/fwanuevovCZ9KJ6'
+        id : parseInt(productos[productos.length - 1].id) + 1,
+        title,
+        price,
+        thumbnail
     }
 
     productos.push(productoNuevo);
@@ -50,13 +50,93 @@ const productosPost = async(req = request, res = response) => {
     fs.writeFileSync(db, JSON.stringify(productos) ,utf);
 
     res.json({
-        productos
+        productoNuevo
     });
+
+}
+
+const productoUpdate = async(req = request, res = response) => {
+
+    // Leo la DB
+    const productos = JSON.parse(fs.readFileSync(db, utf));
+
+    // Leo el id del params
+    const idProductoToModify = parseInt(req.params.id); 
+
+    // Encuentro el producto que quiero modificar
+    const productoToModify = productos.find(producto => producto.id === idProductoToModify);
+    
+    if( !productoToModify ){
+
+        return res.status(400).json({
+            error : 'producto no encontrado'
+        });
+
+    }
+
+    // Obtener el indice en el array del objeto original para pisarlo con el nuevo
+    const index = productos.findIndex(producto => producto === productoToModify);
+    
+    // Leer los datos de la request
+    const { title, price, thumbnail } = req.body; 
+
+    // Modificar el objeto
+    productoToModify.title = title;
+    productoToModify.price = price;
+    productoToModify.thumbnail = thumbnail;
+
+    // Cambiar el objeto en su posición
+    productos.splice(index, 1, productoToModify);
+
+    // Guardar el nuevo array
+    fs.writeFileSync(db, JSON.stringify(productos) ,utf);
+
+    // JSON devuelto
+    res.json({
+        msg: "Producto modificado con exito"
+    })
+
+}
+
+const productoDelete = async(req = request, res = response) => {
+
+    // Leo la DB
+    const productos = JSON.parse(fs.readFileSync(db, utf));
+
+    // Leo el id del params
+    const idProductoToDelete = parseInt(req.params.id); 
+
+    // Encuentro el producto que quiero modificar
+    const productoToDelete = productos.find(producto => producto.id === idProductoToDelete);
+
+    if( !productoToDelete ){
+
+        return res.status(400).json({
+            error : 'producto no encontrado'
+        });
+
+    }
+    
+    // Obtener el indice en el array del objeto original para pisarlo con el nuevo
+    const index = productos.findIndex(producto => producto === productoToDelete);
+
+    // Elimino el objeto
+    productos.splice(index, 1);
+
+    // Guardar el nuevo array
+    fs.writeFileSync(db, JSON.stringify(productos) ,utf);
+
+    // JSON devuelto
+    res.json({
+        msg: "Producto eliminado con exito"
+    })
 
 }
 
 module.exports = {
     productosGet,
-    productosPost,
-    productosGetById
+    productoPost,
+    productosGetById,
+    productoUpdate,
+    productoDelete
 }
