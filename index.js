@@ -1,29 +1,20 @@
-import Contenedor from './classes/Contenedor.js';
+import Container from './classes/Container.js';
 
-// Genero una instancia de la clase contenedor
-let contenedor = new Contenedor('data');
+const container = new Container('data');
 
-// Genero un elemento de testing
-const elementoTest = {
+const elementTest = {
     "title": "Mouse",
-    "price": 123.45
-}
+    "price": 123.45,
+    "thumbnail": "asdasddadsd.png"
+};
 
-// Metodo Save() -> Guardo 5 veces el elemento de test
 for(let i = 0; i < 5 ; i++){
-    console.log(contenedor.save(elementoTest));
-}
+    await container.save(elementTest);
+};
 
-// Metodo getById() -> Obtengo el ID 2
-console.log(contenedor.getById(2));
-
-// Metodo getAll()
-console.log(contenedor.getAll());
-
-// Metodo deleteById()
-contenedor.deleteById(2);
-
-// Metodo deleteAll()
-contenedor.deleteAll();
+await container.getById(2);
+await container.getAll();
+await container.deleteById(2);
+await container.deleteAll();
 
 
