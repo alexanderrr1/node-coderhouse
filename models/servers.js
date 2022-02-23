@@ -6,21 +6,20 @@ class Server{
         this.app = express();
         this.port = process.env.PORT;
 
-        this.productosRoutePath = '/productos';
-
-        // Rutas de mi aplicación
+        this.productsRoutePath = '/products';
+        
         this.routes();
     }
 
     routes() {
 
-        this.app.use( this.productosRoutePath, require('../routes/productos') );
+        this.app.use(this.productsRoutePath, require('../routes/products'));
 
     }
 
     listen() {
-        this.app.listen( this.port , () => {
-            console.log("Servidor corriendo en puerto", this.port);
+        this.app.listen(this.port, () => {
+            console.log("Server running on port:", this.port);
         });
     }
 
