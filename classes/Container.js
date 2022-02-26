@@ -18,10 +18,15 @@ class Container {
     async getById(id) {
         const listOfProducts = await this.getAll();
         const foundProduct = listOfProducts.find(element => element.id === id);
+        if(!foundProduct) return `El producto con id: ${id} no existe`;
         return foundProduct;
     };
 
     async getAll() {
+        const readedData = await fsp.readFile(`./data/${this.fileName}`, this.encode);
+        const firstChar = readedData.charAt(0);
+        const lastChar = readedData.charAt(readedData.length - 1);
+        if( firstChar != "[" || lastChar != "]")  await fsp.writeFile(`./data/${this.fileName}`, "[]", this.encode);
         return JSON.parse(await fsp.readFile(`./data/${this.fileName}`, this.encode));
     };
 
@@ -34,7 +39,7 @@ class Container {
             await fsp.writeFile(`./data/${this.fileName}`, JSON.stringify(file), this.encode);
         }
         return `Deleted element with id ${id}`;
-    }
+    };
 
     async deleteAll() {
         const emptyFile = JSON.stringify([]);
