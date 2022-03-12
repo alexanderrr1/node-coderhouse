@@ -17,7 +17,7 @@ const productosGet = async(req = request, res = response) => {
 const productosGetById = async(req = request, res = response) => {
 
     const productos  = JSON.parse(fs.readFileSync(db, utf));
-    let productoEncontrado = productos.find(producto => producto.id === req.params.id );
+    let productoEncontrado = productos.find(producto => producto.id === parseInt(req.params.id));
 
     if( !productoEncontrado ){
         
@@ -93,7 +93,8 @@ const productoUpdate = async(req = request, res = response) => {
 
     // JSON devuelto
     res.json({
-        msg: "Producto modificado con exito"
+        msg: "Producto modificado con exito",
+        productoToModify
     })
 
 }
