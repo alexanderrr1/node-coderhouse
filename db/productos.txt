@@ -28,5 +28,11 @@
         "title": "Mochila",
         "price": 456.123,
         "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/bag-pack-container-school-256.png"
+    },
+    {
+        "id": 6,
+        "title": "asd",
+        "price": 123,
+        "thumbnail": "zxczxc"
     }
 ]

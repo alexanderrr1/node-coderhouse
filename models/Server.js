@@ -20,9 +20,8 @@ class Server{
     }
 
     viewEngine() {
-        this.app.engine('handlebars', engine());
-        this.app.set('view engine', 'handlebars');
         this.app.set('views', './views');
+        this.app.set('view engine', 'pug');
     }
 
     routes() {

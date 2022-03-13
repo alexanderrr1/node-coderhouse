@@ -6,7 +6,7 @@ const utf = 'utf-8'
 
 const productosGet = async(req = request, res = response) => {
     const productosList  = JSON.parse(fs.readFileSync(db, utf));
-    res.render('productoList', {
+    res.render('productoList.pug', {
         productosList
     });
 }

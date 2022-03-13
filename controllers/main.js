@@ -5,7 +5,7 @@ const db = './db/productos.txt';
 const utf = 'utf-8'
 
 const mainGet = async(req = request, res = response) => {
-    res.render('productoForm');
+    res.render('productoForm.pug');
 }
 
 const mainPost = async(req = request, res = response) => {
