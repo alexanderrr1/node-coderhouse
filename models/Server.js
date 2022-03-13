@@ -1,35 +1,33 @@
 const express = require('express');
+const { engine } = require("express-handlebars");
 
 class Server{
 
     constructor() {
         this.app = express();
         this.port = process.env.PORT;
-
-        this.productosRoutePath = '/api/productos';
-
-        // Middlewares
+        this.productosRoutePath = '/productos';
+        this.mainRoutePath = '/';
         this.middlewares();
-
-        // Rutas de mi aplicación
+        this.viewEngine();
         this.routes();
     }
 
     middlewares() {
-
-        // Lectura y parseo del body
         this.app.use( express.json() );
         this.app.use( express.urlencoded({extended: false}));
-
-        // Directorio Publico
         this.app.use( express.static('public') );
+    }
 
+    viewEngine() {
+        this.app.engine('handlebars', engine());
+        this.app.set('view engine', 'handlebars');
+        this.app.set('views', './views');
     }
 
     routes() {
-
+        this.app.use( this.mainRoutePath, require('../routes/main') );
         this.app.use( this.productosRoutePath, require('../routes/productos') );
-
     }
 
     listen() {
