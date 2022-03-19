@@ -2,8 +2,9 @@ const { Router } = require('express');
 
 const router = Router();
 
-const { productosGet } = require('../controllers/productos');
+const { productosGet, productosGetJSON } = require('../controllers/productos');
 
 router.get( '/', productosGet );
+router.get( '/json', productosGetJSON );
 
 module.exports = router;

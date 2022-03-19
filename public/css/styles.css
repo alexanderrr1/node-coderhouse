@@ -18,3 +18,16 @@
     max-width: 50px;
     max-height: 50px;
 }
+
+.message_sender {
+    font-weight: bold;
+    color: blue;
+}
+
+.message_timestamp {
+    color: #A27933;
+}
+
+.message_message {
+    color: green;
+}

@@ -11,6 +11,14 @@ const productosGet = async(req = request, res = response) => {
     });
 }
 
+const productosGetJSON = async(req = request, res = response) => {
+    const productosList  = JSON.parse(fs.readFileSync(db, utf));
+    res.json({
+        productosList
+    });
+}
+
 module.exports = {
-    productosGet
+    productosGet,
+    productosGetJSON
 }
