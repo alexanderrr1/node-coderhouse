@@ -1,0 +1,20 @@
+.blue{
+    color: blue;
+}
+
+.back-grey{
+    background-color: #E9ECEF;
+}
+
+.back-yellow{
+    background-color: #FFF3CD;
+}
+
+.yellow{
+    color: #A27933;
+}
+
+.images{
+    max-width: 50px;
+    max-height: 50px;
+}
