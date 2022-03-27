@@ -2,11 +2,21 @@ const { Router } = require('express');
 
 const router = Router();
 
-const { mainGet, mainPost } = require('../controllers/carrito.js');
+const { crearCarrito, eliminarCarrito, agregarProductoAlCarrito, obtenerProductosDeCarrito, eliminarProductoDeCarrito } = require('../controllers/carrito.js');
 
-const isAdmin = process.env.ADMIN;
+// Crea un nuevo Carrito
+router.post( '/', crearCarrito ); 
 
-router.get( '/', mainGet ); // Trae todos los productos
-router.post( '/', mainPost ); // Guarda un producto (Predefinido en el método)
+// Borra un Carrito por ID
+router.delete('/:id',eliminarCarrito );
+
+// Listar Productos en un carrito (id Carrito )
+router.get('/:id/productos', obtenerProductosDeCarrito);
+
+// Incorporar Productos a un Carrito ( id Producto && id Carrito )
+router.post('/:id_carrito/productos/:id_producto', agregarProductoAlCarrito);
+
+// Borrar un producto de un carrito ( id Producto && id Carrito)
+router.delete('/:id_carrito/productos/:id_producto', eliminarProductoDeCarrito);
 
 module.exports = router;

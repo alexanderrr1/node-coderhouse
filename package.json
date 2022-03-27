@@ -19,6 +19,7 @@
   "homepage": "https://github.com/alexanderrr1/node-coderhouse#readme",
   "dependencies": {
     "dotenv": "^12.0.4",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "uuid": "^8.3.2"
   }
 }
