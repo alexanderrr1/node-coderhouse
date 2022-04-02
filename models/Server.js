@@ -7,6 +7,7 @@ class Server{
         this.port = process.env.PORT;
         this.productosRoutePath = '/api/productos';
         this.carritoRoutePath = '/api/carrito';
+        this.notFoundRoutPath = '/*';
         this.middlewares();
         this.routes();
     }
@@ -20,6 +21,7 @@ class Server{
     routes() {
         this.app.use( this.carritoRoutePath, require('../routes/carrito') );
         this.app.use( this.productosRoutePath, require('../routes/productos') );
+        this.app.use( this.notFoundRoutPath, require('../routes/notFound') );
     }
 
     listen() {
