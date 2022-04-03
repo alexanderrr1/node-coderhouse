@@ -1,7 +1,7 @@
 const { response, request } = require('express');
 const { v4: uuidv4 } = require('uuid');
-const { mariaDBConfig } = require('../configs/mariaDB');
-const knex = require('knex')(mariaDBConfig);
+const { SQLiteConfig } = require('../configs/SQLite');
+const knex = require('knex')(SQLiteConfig);
 
 const Carrito = require('../models/Carrito');
 

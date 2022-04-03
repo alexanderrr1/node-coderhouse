@@ -1,5 +1,5 @@
 const express = require('express');
-const mariaDB = require('../db/mariaDB');
+const SQLite = require('../db/SQLite');
 
 class Server{
 
@@ -15,7 +15,7 @@ class Server{
     }
 
     async db() {
-        await mariaDB.initialize();
+        await SQLite.initialize();
     }
 
     middlewares() {

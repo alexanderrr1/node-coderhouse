@@ -1,7 +1,7 @@
-const { mariaDBConfig } = require('../configs/mariaDB');
+const { SQLiteConfig } = require('../configs/SQLite');
 
 const initialize = async() => {
-    const knex = require('knex')(mariaDBConfig);
+    const knex = require('knex')(SQLiteConfig);
     console.log("Conexión a la DB con éxito!");
 
     // Crear tabla de Productos
@@ -34,7 +34,7 @@ const initialize = async() => {
         .finally(() => { knex.destroy()});
     }
     
-}
+} 
 
 module.exports = ({
     initialize
