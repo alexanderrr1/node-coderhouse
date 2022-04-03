@@ -1,4 +1,5 @@
 const express = require('express');
+const mariaDB = require('../db/mariaDB');
 
 class Server{
 
@@ -8,8 +9,13 @@ class Server{
         this.productosRoutePath = '/api/productos';
         this.carritoRoutePath = '/api/carrito';
         this.notFoundRoutPath = '/*';
+        this.db();
         this.middlewares();
         this.routes();
+    }
+
+    async db() {
+        await mariaDB.initialize();
     }
 
     middlewares() {
@@ -23,7 +29,7 @@ class Server{
         this.app.use( this.productosRoutePath, require('../routes/productos') );
         this.app.use( this.notFoundRoutPath, require('../routes/notFound') );
     }
-
+    
     listen() {
         this.app.listen( this.port , () => {
             console.log("Servidor corriendo en puerto", this.port);
